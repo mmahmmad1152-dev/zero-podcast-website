@@ -1,0 +1,1416 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>صِفر — ZERO Podcast | بودكاست صِفر من الدوحة</title>
+<meta name="description" content="صِفر — بودكاست حواري عربي من الدوحة، قطر. قصص الرحلة الإنسانية خلف النجاح: السقوط، والشك، والتضحيات، ونقاط التحوّل التي تسبق كل إنجاز.">
+<meta property="og:title" content="صِفر — ZERO Podcast">
+<meta property="og:description" content="قبل كلِّ نجاح… كان هناك صِفر. بودكاست حواري عربي من الدوحة عن الرحلة الإنسانية خلف الإنجاز.">
+<meta property="og:type" content="website">
+<meta property="og:image" content="assets/hero-poster.jpg">
+<meta name="theme-color" content="#12100d">
+<script>document.documentElement.classList.add("js");</script>
+<link rel="icon" type="image/png" href="assets/logo-ivory.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=IBM+Plex+Sans+Arabic:wght@300;400;500;600;700&family=Noto+Kufi+Arabic:wght@400;500;600;700;800&display=swap" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=IBM+Plex+Sans+Arabic:wght@300;400;500;600;700&family=Noto+Kufi+Arabic:wght@400;500;600;700;800&display=swap"><style>.view{display:block !important}.chapter-rail{display:none !important}</style></noscript>
+<style>
+/* ============ ZERO design tokens ============ */
+:root{
+  --ink:#12100d;          /* near-black warm charcoal — primary canvas */
+  --coal:#171410;         /* raised surface */
+  --panel:#1e1a14;        /* card surface */
+  --ivory:#f3ecdd;        /* warm ivory — primary type */
+  --ivory-dim:#d8cfba;    /* secondary type on dark */
+  --grey:#9c937f;         /* muted neutral — meta info */
+  --gold:#c8a15a;         /* champagne gold — precise accent only */
+  --gold-soft:rgba(200,161,90,.38);
+  --red:#cf1f33;          /* the triangle — brand signal */
+  --paper:#f2ecdf;        /* editorial paper — light canvas */
+  --paper-ink:#171410;    /* type on paper */
+  --paper-grey:#6f675a;
+  --line:rgba(243,236,221,.13);
+  --line-paper:rgba(23,20,16,.14);
+  --ease:cubic-bezier(.22,.8,.24,1);
+  --font-display:"Noto Kufi Arabic","IBM Plex Sans Arabic","Segoe UI",Tahoma,Arial,sans-serif;
+  --font-body:"IBM Plex Sans Arabic","Segoe UI",Tahoma,Arial,sans-serif;
+  --font-quote:"Amiri","Traditional Arabic",serif;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  background:var(--ink);color:var(--ivory);
+  font-family:var(--font-body);font-weight:400;
+  line-height:1.85;font-size:17px;
+  -webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;
+  overflow-x:hidden;
+}
+::selection{background:var(--gold);color:var(--ink)}
+img{max-width:100%;display:block}
+a{color:inherit}
+button{font-family:inherit;cursor:pointer}
+:focus-visible{outline:2px solid var(--gold);outline-offset:3px;border-radius:2px}
+
+/* film grain — one restrained texture across the whole site */
+.grain{position:fixed;inset:0;pointer-events:none;z-index:60;opacity:.05;mix-blend-mode:overlay;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)' opacity='0.9'/%3E%3C/svg%3E");}
+
+/* ============ header ============ */
+.site-head{
+  position:fixed;inset-inline:0;top:0;z-index:50;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:14px clamp(18px,4vw,52px);
+  transition:background .5s var(--ease),border-color .5s,padding .5s;
+  border-bottom:1px solid transparent;
+}
+.site-head.scrolled{background:rgba(18,16,13,.88);backdrop-filter:blur(14px);border-bottom-color:var(--line);padding-block:9px}
+.brand{display:flex;align-items:center;gap:14px;text-decoration:none}
+.brand img{height:40px;width:auto}
+.brand .brand-latin{font-family:var(--font-display);font-weight:600;font-size:13px;color:var(--grey);border-inline-start:1px solid var(--line);padding-inline-start:14px;line-height:1.5}
+.main-nav{display:flex;gap:6px;align-items:center}
+.main-nav a{
+  text-decoration:none;font-size:15px;font-weight:500;color:var(--ivory-dim);
+  padding:9px 13px;border-radius:999px;transition:color .3s,background .3s;white-space:nowrap;
+}
+.main-nav a:hover{color:var(--ivory)}
+.main-nav a[aria-current="page"]{color:var(--gold)}
+.nav-cta{border:1px solid var(--gold-soft);color:var(--gold)!important}
+.nav-cta:hover{background:rgba(200,161,90,.1)}
+.menu-btn{display:none;background:none;border:1px solid var(--line);border-radius:10px;width:46px;height:46px;color:var(--ivory);font-size:20px;line-height:1;z-index:55}
+@media (max-width:900px){
+  .menu-btn{display:block}
+  .main-nav{
+    position:fixed;inset-inline:0;top:0;padding:96px 26px 30px;flex-direction:column;align-items:stretch;gap:2px;
+    background:rgba(15,13,10,.97);backdrop-filter:blur(16px);border-bottom:1px solid var(--line);
+    transform:translateY(-105%);transition:transform .5s var(--ease);z-index:49;
+  }
+  .main-nav.open{transform:translateY(0)}
+  .main-nav a{padding:14px 10px;font-size:18px;border-bottom:1px solid var(--line);border-radius:0}
+  .main-nav a:last-child{border-bottom:0}
+  .brand .brand-latin{display:none}
+}
+
+/* ============ views ============ */
+.view{display:none}
+.view.active{display:block;animation:viewIn .7s var(--ease)}
+@keyframes viewIn{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+
+/* ============ shared editorial pieces ============ */
+.wrap{max-width:1240px;margin-inline:auto;padding-inline:clamp(20px,5vw,56px)}
+.kicker{font-family:var(--font-display);font-weight:600;font-size:13.5px;color:var(--gold);display:flex;align-items:center;gap:12px}
+.kicker::after{content:"";height:1px;width:52px;background:var(--gold-soft)}
+.kicker.center{justify-content:center}
+.kicker.center::before{content:"";height:1px;width:52px;background:var(--gold-soft)}
+h1,h2,h3{font-family:var(--font-display);font-weight:700;line-height:1.45}
+.lede{color:var(--ivory-dim);font-size:clamp(17px,1.6vw,20px);font-weight:300;max-width:62ch}
+.btn{
+  display:inline-flex;align-items:center;gap:10px;text-decoration:none;
+  font-family:var(--font-display);font-weight:600;font-size:15.5px;
+  padding:14px 28px;border-radius:999px;border:1px solid transparent;transition:all .35s var(--ease);
+}
+.btn-gold{background:var(--gold);color:#191510}
+.btn-gold:hover{background:#d9b878}
+.btn-ghost{border-color:var(--line);color:var(--ivory)}
+.btn-ghost:hover{border-color:var(--gold-soft);color:var(--gold)}
+.btn .arr{transition:transform .35s var(--ease)}
+.btn:hover .arr{transform:translateX(-4px)}
+.hairline{height:1px;background:var(--line);border:0}
+
+/* scroll reveal — hidden state exists ONLY when JS is active (html.js);
+   content is fully visible with JS off, and a JS failsafe reveals all after a beat */
+.js .rv{opacity:0;transform:translateY(26px);transition:opacity .9s var(--ease),transform .9s var(--ease)}
+.js .rv.in{opacity:1;transform:none}
+
+/* first-screen entrance — pure CSS, no JS, no observer: the hero copy
+   (headline incl. the word صِفر, lede, CTAs) rises in on load and ALWAYS
+   lands visible, so it can never be trapped hidden by script timing */
+.hero-in{opacity:0;animation:heroIn .95s var(--ease) forwards}
+@keyframes heroIn{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:none}}
+
+/* ============ hero ============ */
+.hero{display:flex;flex-direction:column;justify-content:flex-start;padding:64px 0 70px;position:relative;
+  background:radial-gradient(1100px 520px at 50% -8%,rgba(200,161,90,.09),transparent 62%),var(--ink)}
+.hero-film{width:100%;margin-inline:auto}
+.film-frame{position:relative;overflow:visible;background:var(--ink)}
+.film-frame video{width:100%;aspect-ratio:16/9;display:block;object-fit:cover;background:var(--ink);
+  -webkit-mask-image:linear-gradient(180deg,transparent 0,#000 9%,#000 80%,transparent 100%),linear-gradient(90deg,transparent 0,#000 6.5%,#000 93.5%,transparent 100%);
+  -webkit-mask-composite:source-in;
+  mask-image:linear-gradient(180deg,transparent 0,#000 9%,#000 80%,transparent 100%),linear-gradient(90deg,transparent 0,#000 6.5%,#000 93.5%,transparent 100%);
+  mask-composite:intersect}
+.film-frame::before{content:"";position:absolute;inset:-2px 0 auto 0;height:15%;pointer-events:none;z-index:2;
+  background:linear-gradient(0deg,transparent,var(--ink))}
+.film-frame::after{content:"";position:absolute;inset:auto 0 -2px 0;height:22%;pointer-events:none;z-index:2;
+  background:linear-gradient(180deg,transparent,var(--ink))}
+.film-tools{position:absolute;bottom:9%;inset-inline:0;display:flex;gap:8px;z-index:3;flex-wrap:wrap;justify-content:center}
+.film-tools button{
+  background:rgba(12,10,8,.72);backdrop-filter:blur(8px);color:var(--ivory);
+  border:1px solid var(--line);border-radius:999px;padding:8px 16px;font-size:13.5px;font-weight:500;transition:border-color .3s,color .3s;
+}
+.film-tools button:hover{border-color:var(--gold-soft);color:var(--gold)}
+.hero-copy{text-align:center;padding:6px clamp(20px,5vw,56px) 0;max-width:900px;margin-inline:auto;position:relative;z-index:2}
+.tri-mark{width:0;height:0;margin:0 auto 14px;border-inline:11px solid transparent;border-top:16px solid var(--red);animation:triFloat 5s ease-in-out infinite}
+@keyframes triFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(6px)}}
+
+/* moving words strip — the journey, in motion */
+.marquee{overflow:hidden;border-block:1px solid var(--line);background:rgba(200,161,90,.03);padding:18px 0;direction:ltr}
+.marquee-track{display:flex;width:max-content;animation:mqMove 32s linear infinite}
+.marquee:hover .marquee-track{animation-play-state:paused}
+.mq-set{display:flex;align-items:center;gap:36px;padding-inline-end:36px;flex:none}
+.mq-item{font-family:var(--font-display);font-weight:600;font-size:clamp(16px,2vw,21px);color:var(--ivory-dim);white-space:nowrap}
+.mq-item.hot{color:var(--gold)}
+.mq-tri{width:0;height:0;border-inline:6px solid transparent;border-top:9px solid var(--red);flex:none}
+@keyframes mqMove{to{transform:translateX(-50%)}}
+
+/* word-by-word headline motion (spans built by JS; no JS = plain text) */
+.words .w{display:inline-block;overflow:hidden;vertical-align:bottom;padding-bottom:.14em;margin-bottom:-.14em}
+.words .wi{display:inline-block;transform:translateY(118%);opacity:0;transition:transform .85s var(--ease),opacity .85s var(--ease);transition-delay:calc(var(--i,0)*65ms)}
+.words.in .wi{transform:none;opacity:1}
+/* fast word flow for body / example text — same reveal, quicker rhythm */
+.words-fast .wi{transition-duration:.55s;transition-delay:calc(var(--i,0)*20ms)}
+
+/* staggered lists: example rows and cards arrive one after another */
+.js .contents .contents-row,
+.js .feature-rows .feature-row,
+.js .principles .principle,
+.js .state-legend span,
+.js .credits dl>div,
+.js .matrix tbody tr{opacity:0;transform:translateY(22px);transition:opacity .8s var(--ease),transform .8s var(--ease)}
+.js .contents.in .contents-row,
+.js .feature-rows.in .feature-row,
+.js .principles.in .principle,
+.js .state-legend.in span,
+.js .credits.in dl>div,
+.js .matrix.in tbody tr{opacity:1;transform:none}
+.js .contents.in .contents-row:nth-child(2),.js .feature-rows.in .feature-row:nth-child(2),
+.js .principles.in .principle:nth-child(2),.js .state-legend.in span:nth-child(2),
+.js .credits.in dl>div:nth-child(2),.js .matrix.in tbody tr:nth-child(2){transition-delay:.1s}
+.js .contents.in .contents-row:nth-child(3),.js .feature-rows.in .feature-row:nth-child(3),
+.js .principles.in .principle:nth-child(3),.js .state-legend.in span:nth-child(3),
+.js .credits.in dl>div:nth-child(3),.js .matrix.in tbody tr:nth-child(3){transition-delay:.2s}
+.js .contents.in .contents-row:nth-child(4),.js .feature-rows.in .feature-row:nth-child(4),
+.js .credits.in dl>div:nth-child(4),.js .matrix.in tbody tr:nth-child(4){transition-delay:.3s}
+.js .credits.in dl>div:nth-child(5),.js .matrix.in tbody tr:nth-child(5){transition-delay:.4s}
+.js .credits.in dl>div:nth-child(6),.js .matrix.in tbody tr:nth-child(6){transition-delay:.5s}
+.js .matrix.in tbody tr:nth-child(7){transition-delay:.6s}
+.js .matrix.in tbody tr:nth-child(8){transition-delay:.7s}
+
+/* gentle continuous drift for chapter numerals and the closing mark */
+.chapter-num{animation:numDrift 7s ease-in-out infinite alternate}
+@keyframes numDrift{from{transform:translateY(0)}to{transform:translateY(-8px)}}
+.closing img.mark{animation:markFloat 6.5s ease-in-out infinite}
+@keyframes markFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-9px)}}
+
+/* example rows: a gold line sweeps in on hover; principle cards lift softly */
+.contents-row{position:relative}
+.contents-row::after{content:"";position:absolute;bottom:-1px;inset-inline-start:0;height:1px;width:100%;background:var(--gold);transform:scaleX(0);transform-origin:right;transition:transform .55s var(--ease)}
+.contents-row:hover::after{transform:scaleX(1)}
+.principle{transition:transform .45s var(--ease)}
+.principle:hover{transform:translateY(-4px)}
+.feature-row{transition:background .3s}
+.feature-row:hover{background:rgba(243,236,221,.03)}
+
+/* reversed marquee variant (closing quotes strip) */
+.marquee.rev .marquee-track{animation-direction:reverse;animation-duration:40s}
+.marquee .mq-item.quote{font-family:var(--font-quote);font-weight:400}
+
+/* form fields drift in one by one when their view opens */
+.view.active .form-shell .field{animation:fieldIn .7s var(--ease) both}
+.view.active .form-shell .field:nth-child(2){animation-delay:.07s}
+.view.active .form-shell .field:nth-child(3){animation-delay:.14s}
+.view.active .form-shell .field:nth-child(4){animation-delay:.21s}
+.view.active .form-shell .field:nth-child(5){animation-delay:.28s}
+.view.active .form-shell .field:nth-child(6){animation-delay:.35s}
+@keyframes fieldIn{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
+.hero h1{font-size:clamp(34px,5.6vw,64px);font-weight:800;line-height:1.5;margin:18px 0 14px}
+.hero h1 .zero-word{color:var(--gold)}
+.hero .lede{margin-inline:auto;font-size:clamp(18px,1.9vw,22px);line-height:2;color:var(--ivory);font-weight:400;max-width:56ch}
+.hero .lede b{color:var(--gold);font-weight:600}
+.hero-ctas{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin-top:32px}
+.hero-meta{margin-top:26px;color:var(--grey);font-size:14px;display:flex;gap:10px;justify-content:center;flex-wrap:wrap;align-items:center}
+.hero-meta .dot{width:4px;height:4px;border-radius:50%;background:var(--gold);flex:none}
+.scroll-hint{margin:52px auto 0;width:26px;height:44px;border:1px solid var(--line);border-radius:999px;display:flex;justify-content:center;padding-top:9px}
+.scroll-hint span{width:4px;height:9px;border-radius:4px;background:var(--gold);animation:drop 2.2s var(--ease) infinite}
+@keyframes drop{0%{transform:translateY(0);opacity:1}70%{transform:translateY(14px);opacity:0}100%{opacity:0}}
+
+/* chapter progress rail */
+.chapter-rail{position:fixed;inset-inline-end:22px;top:50%;transform:translateY(-50%);z-index:40;display:none;flex-direction:column;gap:14px;align-items:center}
+.chapter-rail.show{display:flex}
+.chapter-rail .rail-line{width:1px;height:74px;background:var(--line);position:relative;overflow:hidden}
+.chapter-rail .rail-fill{position:absolute;top:0;inset-inline:0;background:var(--gold);height:0%}
+.chapter-rail a{font-family:var(--font-display);font-size:11.5px;color:var(--grey);text-decoration:none;writing-mode:vertical-rl;padding:4px 2px;transition:color .3s}
+.chapter-rail a.on{color:var(--gold)}
+@media (max-width:900px){.chapter-rail{display:none!important}}
+
+/* ============ chapters (scroll narrative) ============ */
+.chapter{padding:clamp(80px,11vw,150px) 0;position:relative}
+.chapter-grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(34px,6vw,90px);align-items:center}
+.chapter.flip .chapter-media{order:2}
+.chapter-num{font-family:var(--font-display);font-weight:800;font-size:clamp(64px,8vw,110px);line-height:1;color:rgba(200,161,90,.17)}
+.chapter h2{font-size:clamp(28px,3.6vw,44px);margin:16px 0 14px}
+.chapter p{color:var(--ivory-dim);font-weight:300;font-size:clamp(16.5px,1.5vw,19px);max-width:52ch}
+.chapter p.lead-in{font-size:clamp(18px,1.8vw,21.5px);line-height:2;color:var(--ivory);font-weight:400}
+.chapter p.lead-in b{color:var(--gold);font-weight:600}
+#ch-1,#ch-2{position:relative}
+#ch-1::before,#ch-2::before{content:"";position:absolute;inset:0;pointer-events:none;
+  background:radial-gradient(720px 380px at 82% 18%,rgba(200,161,90,.055),transparent 65%)}
+#ch-2::before{background:radial-gradient(720px 380px at 16% 24%,rgba(207,31,51,.045),transparent 65%)}
+.chapter-media{position:relative;border-radius:10px;overflow:hidden;border:1px solid var(--line)}
+.chapter-media img{width:100%;height:100%;object-fit:cover;aspect-ratio:4/3;will-change:transform}
+.chapter-media.tall img{aspect-ratio:3/3.4}
+.pullquote{font-family:var(--font-quote);font-size:clamp(24px,3vw,36px);line-height:2;color:var(--ivory);border-inline-start:2px solid var(--gold);padding-inline-start:22px;margin-top:26px}
+@media (max-width:860px){.chapter-grid{grid-template-columns:1fr}.chapter.flip .chapter-media{order:0}}
+
+/* manifesto band */
+.manifesto{background:var(--paper);color:var(--paper-ink);padding:clamp(80px,10vw,140px) 0}
+.manifesto .kicker{color:#8a6a2f}
+.manifesto .kicker::after,.manifesto .kicker::before{background:rgba(138,106,47,.4)}
+.manifesto blockquote{font-family:var(--font-quote);font-weight:700;font-size:clamp(28px,4.4vw,52px);line-height:1.95;text-align:center;max-width:22em;margin:26px auto 0}
+.manifesto blockquote .tri{color:var(--red)}
+.manifesto .sig{text-align:center;margin-top:30px;color:var(--paper-grey);font-size:15px}
+
+/* season / issue */
+.season-head{display:flex;justify-content:space-between;align-items:flex-end;gap:26px;flex-wrap:wrap;margin-bottom:14px}
+.status-chip{display:inline-flex;align-items:center;gap:9px;border:1px solid var(--gold-soft);color:var(--gold);border-radius:999px;padding:7px 16px;font-size:13.5px;font-weight:600;font-family:var(--font-display)}
+.status-chip i{width:7px;height:7px;border-radius:50%;background:var(--gold);animation:pulse 2.4s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.25}}
+.contents{border-top:1px solid var(--line);margin-top:34px}
+.contents-row{display:grid;grid-template-columns:74px 1fr auto;gap:20px;align-items:baseline;padding:24px 6px;border-bottom:1px solid var(--line);transition:background .3s}
+.contents-row:hover{background:rgba(243,236,221,.03)}
+.contents-row .no{font-family:var(--font-display);font-weight:700;color:var(--gold);font-size:19px}
+.contents-row h3{font-size:clamp(19px,2.2vw,24px);font-weight:600}
+.contents-row p{color:var(--grey);font-weight:300;font-size:15.5px;max-width:56ch}
+.contents-row .st{font-size:13px;color:var(--grey);white-space:nowrap;border:1px solid var(--line);padding:5px 13px;border-radius:999px}
+@media (max-width:640px){.contents-row{grid-template-columns:44px 1fr}.contents-row .st{display:none}}
+
+/* cta bands */
+section.block{padding:clamp(56px,7vw,96px) 0}
+.cta-band{display:grid;grid-template-columns:1.15fr .85fr;gap:clamp(30px,5vw,70px);align-items:center}
+.cta-band h2{font-size:clamp(27px,3.4vw,42px);margin-bottom:12px}
+.cta-band p{color:var(--ivory-dim);font-weight:300;max-width:48ch}
+.cta-media{border-radius:10px;overflow:hidden;border:1px solid var(--line)}
+.cta-media img{width:100%;aspect-ratio:16/10;object-fit:cover}
+@media (max-width:860px){.cta-band{grid-template-columns:1fr}}
+
+/* closing */
+.closing{position:relative;padding:clamp(90px,12vw,170px) 0;text-align:center;overflow:hidden}
+.closing .bg{position:absolute;inset:0}
+.closing .bg img{width:100%;height:100%;object-fit:cover;opacity:.5;animation:kbDrift 26s ease-in-out infinite alternate}
+@keyframes kbDrift{from{transform:scale(1)}to{transform:scale(1.09)}}
+.closing .bg::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,var(--ink) 2%,rgba(18,16,13,.45) 45%,var(--ink) 98%)}
+.closing .inner{position:relative;z-index:2}
+.closing img.mark{height:clamp(90px,14vw,150px);width:auto;margin:0 auto 30px}
+.closing h2{font-size:clamp(30px,4.6vw,54px);line-height:1.55;max-width:20em;margin-inline:auto}
+.closing p{color:var(--ivory-dim);font-weight:300;margin:18px auto 32px;max-width:52ch}
+
+/* ============ page heads (sub-pages) ============ */
+.page-head{padding:158px 0 54px}
+.page-head h1{font-size:clamp(34px,5.4vw,58px);font-weight:800;margin:16px 0 14px}
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:clamp(30px,5vw,72px)}
+@media (max-width:860px){.two-col{grid-template-columns:1fr}}
+
+/* credits block (film-credits discipline for episodes) */
+.credits{border:1px solid var(--line);border-radius:10px;padding:clamp(24px,4vw,44px);background:var(--coal)}
+.credits dl{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:26px 34px}
+.credits dt{font-size:13px;color:var(--grey);font-family:var(--font-display);font-weight:600;margin-bottom:5px}
+.credits dd{font-size:17px;color:var(--ivory)}
+
+/* episode states */
+.state-legend{display:flex;gap:10px;flex-wrap:wrap;margin:26px 0 8px}
+.state-legend span{font-size:13.5px;border:1px solid var(--line);border-radius:999px;padding:6px 15px;color:var(--ivory-dim)}
+.state-legend b{color:var(--gold);font-weight:600}
+.empty-state{border:1px dashed rgba(200,161,90,.35);border-radius:12px;padding:clamp(34px,6vw,64px);text-align:center;background:rgba(200,161,90,.03)}
+.empty-state h2{font-size:clamp(24px,3.4vw,36px);margin-bottom:12px}
+.empty-state p{color:var(--ivory-dim);font-weight:300;max-width:54ch;margin:0 auto 26px}
+.feature-rows{border-top:1px solid var(--line)}
+.feature-row{display:grid;grid-template-columns:64px 1fr;gap:22px;padding:26px 4px;border-bottom:1px solid var(--line)}
+.feature-row .no{font-family:var(--font-display);font-weight:700;color:var(--gold);font-size:18px}
+.feature-row h3{font-size:20px;margin-bottom:6px}
+.feature-row p{color:var(--grey);font-weight:300;font-size:15.5px;max-width:60ch}
+
+/* principles list */
+.principles{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:1px;background:var(--line);border:1px solid var(--line);border-radius:12px;overflow:hidden}
+.principle{background:var(--coal);padding:30px 28px}
+.principle .no{font-family:var(--font-display);color:var(--gold);font-weight:700;font-size:14px}
+.principle h3{font-size:20px;margin:10px 0 8px}
+.principle p{color:var(--grey);font-weight:300;font-size:15.5px}
+
+/* ============ forms ============ */
+.form-shell{max-width:820px}
+.field{margin-bottom:24px}
+.field label{display:block;font-family:var(--font-display);font-weight:600;font-size:15px;margin-bottom:9px}
+.field label .req{color:var(--red)}
+.field .hint{font-size:13.5px;color:var(--grey);font-weight:300;margin-top:6px}
+.field input,.field textarea,.field select{
+  width:100%;background:var(--coal);border:1px solid var(--line);border-radius:10px;
+  padding:14px 16px;color:var(--ivory);font-family:var(--font-body);font-size:16.5px;line-height:1.7;
+  transition:border-color .3s;appearance:none;
+}
+.field textarea{min-height:150px;resize:vertical}
+.field input:focus,.field textarea:focus,.field select:focus{outline:none;border-color:var(--gold)}
+.field .err{display:none;color:#e88;font-size:14px;margin-top:7px}
+.field.invalid input,.field.invalid textarea,.field.invalid select{border-color:#a33}
+.field.invalid .err{display:block}
+.form-note{border:1px solid var(--line);border-radius:10px;padding:18px 20px;color:var(--ivory-dim);font-weight:300;font-size:15px;background:rgba(243,236,221,.02)}
+.form-result{display:none;border:1px solid var(--gold-soft);border-radius:12px;padding:clamp(24px,4vw,40px);background:rgba(200,161,90,.05);margin-top:34px}
+.form-result.show{display:block;animation:viewIn .6s var(--ease)}
+.form-result h3{font-size:23px;margin-bottom:10px}
+.form-result pre{
+  white-space:pre-wrap;word-break:break-word;background:var(--ink);border:1px solid var(--line);border-radius:10px;
+  padding:20px;font-family:var(--font-body);font-size:15px;line-height:1.9;color:var(--ivory-dim);max-height:340px;overflow:auto;margin:18px 0;
+}
+.result-actions{display:flex;gap:12px;flex-wrap:wrap}
+.mini-btn{background:none;border:1px solid var(--line);color:var(--ivory);border-radius:999px;padding:11px 22px;font-family:var(--font-display);font-weight:600;font-size:14.5px;transition:all .3s;text-decoration:none;display:inline-flex;align-items:center}
+.mini-btn:hover{border-color:var(--gold-soft);color:var(--gold)}
+.copied{color:var(--gold)!important;border-color:var(--gold-soft)!important}
+
+/* research matrix table -> stacked on mobile */
+.matrix{width:100%;border-collapse:collapse;font-size:14.5px}
+.matrix th,.matrix td{border-bottom:1px solid var(--line);padding:16px 12px;text-align:start;vertical-align:top}
+.matrix th{font-family:var(--font-display);color:var(--gold);font-weight:600;font-size:13.5px;white-space:nowrap}
+.matrix td{color:var(--ivory-dim);font-weight:300;line-height:1.75}
+.matrix td:first-child{color:var(--ivory);font-weight:500;white-space:nowrap}
+.matrix a{color:var(--gold);text-decoration:none;border-bottom:1px dotted var(--gold-soft)}
+@media (max-width:760px){
+  .matrix thead{display:none}
+  .matrix,.matrix tbody,.matrix tr,.matrix td{display:block;width:100%}
+  .matrix tr{padding:14px 0;border-bottom:1px solid var(--line)}
+  .matrix td{border:0;padding:4px 0}
+  .matrix td:first-child{font-size:17px}
+}
+
+/* ============ footer ============ */
+footer{border-top:1px solid var(--line);padding:64px 0 34px;background:#0d0b08}
+.foot-grid{display:grid;grid-template-columns:1.3fr 1fr 1fr;gap:44px;margin-bottom:48px}
+.foot-grid img{height:64px;width:auto;margin-bottom:18px}
+.foot-grid p{color:var(--grey);font-weight:300;font-size:15px;max-width:38ch}
+.foot-grid h4{font-family:var(--font-display);font-size:15px;margin-bottom:16px;color:var(--ivory)}
+.foot-grid ul{list-style:none}
+.foot-grid li{margin-bottom:10px}
+.foot-grid a{color:var(--grey);text-decoration:none;font-size:15px;transition:color .3s}
+.foot-grid a:hover{color:var(--gold)}
+.foot-base{border-top:1px solid var(--line);padding-top:24px;display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;color:var(--grey);font-size:13.5px}
+@media (max-width:860px){.foot-grid{grid-template-columns:1fr}}
+
+@media (prefers-reduced-motion: reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{animation-duration:.001s!important;transition-duration:.001s!important}
+  .rv{opacity:1;transform:none}
+  .words .wi{transform:none;opacity:1}
+  .js .contents .contents-row,.js .feature-rows .feature-row,.js .principles .principle,
+  .js .state-legend span,.js .credits dl>div,.js .matrix tbody tr{opacity:1;transform:none}
+}
+</style>
+</head>
+<body>
+<div class="grain" aria-hidden="true"></div>
+
+<header class="site-head" id="siteHead">
+  <a class="brand" href="#home" data-nav="home" aria-label="صِفر — الرئيسية">
+    <img src="assets/logo-ivory.png" alt="شعار بودكاست صِفر">
+    <span class="brand-latin" lang="en">ZERO PODCAST<br>DOHA · الدوحة</span>
+  </a>
+  <button class="menu-btn" id="menuBtn" aria-label="فتح القائمة" aria-expanded="false" aria-controls="mainNav">☰</button>
+  <nav class="main-nav" id="mainNav" aria-label="التنقل الرئيسي">
+    <a href="#home" data-nav="home">الرئيسية</a>
+    <a href="#episodes" data-nav="episodes">الحلقات</a>
+    <a href="#story" data-nav="story">قصّتنا</a>
+    <a href="#partners" data-nav="partners">الشراكات</a>
+    <a href="#contact" data-nav="contact">تواصل</a>
+    <a href="#nominate" data-nav="nominate" class="nav-cta">رشّح ضيفًا</a>
+  </nav>
+</header>
+
+<aside class="chapter-rail" id="chapterRail" aria-hidden="true">
+  <a href="#ch-1" data-ch="ch-1">٠١</a>
+  <div class="rail-line"><div class="rail-fill" id="railFill"></div></div>
+  <a href="#ch-2" data-ch="ch-2">٠٢</a>
+  <a href="#ch-3" data-ch="ch-3">٠٣</a>
+  <a href="#ch-4" data-ch="ch-4">٠٤</a>
+</aside>
+
+<main>
+<!-- ================= HOME ================= -->
+<div class="view active" id="view-home">
+
+  <section class="hero">
+    <div class="hero-film hero-in">
+      <div class="film-frame">
+        <video id="heroVideo" poster="assets/hero-poster.jpg" muted playsinline loop preload="auto"
+               aria-label="موشن جرافيكس هوية بودكاست صِفر: كلمة صِفر تُبنى قطعةً قطعة ويستقر فوقها المثلث الأحمر">
+          <source src="assets/hero-reveal.mp4" type="video/mp4">
+        </video>
+        <div class="film-tools">
+          <button type="button" id="soundBtn">إعادة التشغيل بالصوت</button>
+          <button type="button" id="replayBtn">إعادة التشغيل</button>
+        </div>
+      </div>
+    </div>
+    <div class="hero-copy">
+      <div class="tri-mark" aria-hidden="true"></div>
+      <p class="kicker center hero-in" style="animation-delay:.1s">بودكاست حواري · الدوحة، قطر</p>
+      <h1 class="hero-in" style="animation-delay:.2s">قبل كلِّ نجاح…<br>كان هناك <span class="zero-word">صِفر</span></h1>
+      <p class="lede hero-in" style="animation-delay:.34s">«صِفر» ليس برنامج مقابلات عاديًا. إنه رحلة إلى <b>ما قبل الإنجاز</b>: إلى السقوط والشكّ والتضحيات والقرارات الصعبة التي لا تظهر في قصص النجاح المُعلنة — بل تصنعها.</p>
+      <div class="hero-ctas hero-in" style="animation-delay:.48s">
+        <a class="btn btn-gold" href="#story" data-nav="story">اكتشف قصّتنا <span class="arr">←</span></a>
+        <a class="btn btn-ghost" href="#episodes" data-nav="episodes">الموسم الأول</a>
+      </div>
+      <div class="hero-meta hero-in" style="animation-delay:.6s">
+        <span>الموسم الأول قيد الإنتاج</span><span class="dot"></span>
+        <span>يُسجَّل في الدوحة</span><span class="dot"></span>
+        <span>بالعربية أولًا</span>
+      </div>
+    </div>
+    <div class="scroll-hint" aria-hidden="true"><span></span></div>
+  </section>
+
+  <!-- Moving words: the journey, in motion -->
+  <div class="marquee" aria-hidden="true">
+    <div class="marquee-track">
+      <div class="mq-set">
+        <span class="mq-item hot">من الصِّفر</span><span class="mq-tri"></span>
+        <span class="mq-item">العدم</span><span class="mq-tri"></span>
+        <span class="mq-item">السقوط</span><span class="mq-tri"></span>
+        <span class="mq-item">الشكّ</span><span class="mq-tri"></span>
+        <span class="mq-item">التضحية</span><span class="mq-tri"></span>
+        <span class="mq-item">القرار</span><span class="mq-tri"></span>
+        <span class="mq-item">نقطة التحوّل</span><span class="mq-tri"></span>
+        <span class="mq-item hot">النهوض</span><span class="mq-tri"></span>
+      </div>
+      <div class="mq-set">
+        <span class="mq-item hot">من الصِّفر</span><span class="mq-tri"></span>
+        <span class="mq-item">العدم</span><span class="mq-tri"></span>
+        <span class="mq-item">السقوط</span><span class="mq-tri"></span>
+        <span class="mq-item">الشكّ</span><span class="mq-tri"></span>
+        <span class="mq-item">التضحية</span><span class="mq-tri"></span>
+        <span class="mq-item">القرار</span><span class="mq-tri"></span>
+        <span class="mq-item">نقطة التحوّل</span><span class="mq-tri"></span>
+        <span class="mq-item hot">النهوض</span><span class="mq-tri"></span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Chapter 01 -->
+  <section class="chapter" id="ch-1">
+    <div class="wrap chapter-grid">
+      <div class="rv">
+        <div class="chapter-num" aria-hidden="true">٠١</div>
+        <p class="kicker">الفصل الأول — العَدَم</p>
+        <h2 data-words>قبل كلِّ أسطورة،<br>لم يكن هناك شيء</h2>
+        <p class="lead-in">كل اسمٍ كبير تعرفه اليوم بدأ من <b>نقطة لا يراها أحد</b>: غرفة صغيرة، فكرة مرفوضة، حساب فارغ، أو ليلة طويلة من الشك. «صِفر» يبدأ من هناك — من اللحظة التي لا توثّقها الكاميرات، لكنّها تُقرّر كل ما يأتي بعدها.</p>
+      </div>
+      <div class="chapter-media rv"><img class="parallax" src="assets/journey.webp" alt="شخص يقف وحيدًا في ظلام دامس يواجه شعاعًا بعيدًا من الضوء الذهبي" loading="lazy"></div>
+    </div>
+  </section>
+
+  <!-- Chapter 02 -->
+  <section class="chapter flip" id="ch-2">
+    <div class="wrap chapter-grid">
+      <div class="rv">
+        <div class="chapter-num" aria-hidden="true">٠٢</div>
+        <p class="kicker">الفصل الثاني — السقوط</p>
+        <h2 data-words>الفشل ليس نهاية القصة.<br>إنه المادّة التي تُبنى منها</h2>
+        <p class="lead-in">لا نسأل ضيوفنا «كيف نجحت؟» — بل نسأل: <b>ما الذي انكسر؟</b> ومتى فكّرت في الاستسلام؟ وكم كلّفك أن تكمل؟ لأن الحقيقة التي يعرفها كل من وصل: الطريق إلى القمة يمرّ حتمًا بنقطة الانكسار.</p>
+        <blockquote class="pullquote">«النجاح الذي يستحق أن يُروى، هو الذي كاد ألّا يحدث.»</blockquote>
+      </div>
+      <div class="chapter-media tall rv"><img class="parallax" src="assets/studio.webp" alt="كرسيّان متقابلان في استوديو تسجيل مظلم تحت عمود من الضوء الدافئ وميكروفون بينهما" loading="lazy"></div>
+    </div>
+  </section>
+
+  <!-- Manifesto -->
+  <section class="manifesto">
+    <div class="wrap">
+      <p class="kicker center rv">فلسفة صِفر</p>
+      <blockquote class="rv" data-words>نحن لا نحتفي بالوصول.<br>نحتفي بمن <span class="tri">نهض</span> —<br>مرّةً بعد مرّة — من الصِّفر.</blockquote>
+      <p class="sig rv">حوار واحد في كل حلقة · صوت واحد · قصة تُروى كما حدثت فعلًا</p>
+    </div>
+  </section>
+
+  <!-- Chapter 03 -->
+  <section class="chapter" id="ch-3">
+    <div class="wrap chapter-grid">
+      <div class="rv">
+        <div class="chapter-num" aria-hidden="true">٠٣</div>
+        <p class="kicker">الفصل الثالث — نقطة التحوّل</p>
+        <h2 data-words>قرار واحد يغيّر كل شيء</h2>
+        <p class="lead-in">في كل قصة <b>لحظة فاصلة</b>: استقالة في منتصف الليل، مخاطرة بكل شيء، أو كلمة من شخص غيّر المسار. نطيل الوقوف عند هذه اللحظات، لأنها المكان الذي يتحوّل فيه الإنسان العادي إلى قصة تستحق أن تُسمَع.</p>
+      </div>
+      <div class="chapter-media rv"><img class="parallax" src="assets/doha-skyline.jpg" alt="أفق الخليج الغربي في الدوحة عند الغسق" loading="lazy"></div>
+    </div>
+  </section>
+
+  <!-- Chapter 04 + Season -->
+  <section class="chapter" id="ch-4" style="padding-top:20px">
+    <div class="wrap">
+      <div class="season-head rv">
+        <div>
+          <div class="chapter-num" aria-hidden="true" style="font-size:clamp(44px,5vw,64px)">٠٤</div>
+          <p class="kicker">الفصل الرابع — النهوض · الموسم الأول</p>
+          <h2 data-words style="font-size:clamp(28px,3.6vw,44px);margin-top:14px">العدد الأول: قيد الإعداد</h2>
+        </div>
+        <span class="status-chip"><i></i> الموسم الأول — قيد الإنتاج في الدوحة</span>
+      </div>
+      <p class="lede rv">نُصدر «صِفر» في مواسم مرقّمة تُبنى كأعداد مجلّة: لكل موسم غلافه وموضوعاته وختامه، ولا ننشر حلقة قبل أن تستحق مكانها في العدد. هذه هي محاور الموسم الأول — أما أسماء الضيوف ومواعيد النشر فستُعلن هنا فور اعتمادها، لا قبل ذلك.</p>
+      <div class="contents rv">
+        <div class="contents-row"><span class="no">٠١</span><div><h3>البدايات الصعبة</h3><p>سنوات التأسيس الأولى التي لا يراها أحد: الفقر، والرفض، والعمل في الظل.</p></div><span class="st">محور الموسم</span></div>
+        <div class="contents-row"><span class="no">٠٢</span><div><h3>لحظات الانكسار</h3><p>الخسارات والإخفاقات العلنية، وكيف أعاد أصحابها بناء أنفسهم من جديد.</p></div><span class="st">محور الموسم</span></div>
+        <div class="contents-row"><span class="no">٠٣</span><div><h3>القرارات المصيرية</h3><p>المفارق التي قُسّمت عندها الحياة إلى «قبل» و«بعد»، وثمن كل قرار.</p></div><span class="st">محور الموسم</span></div>
+        <div class="contents-row"><span class="no">٠٤</span><div><h3>ثمن الطموح</h3><p>التضحيات الصامتة: العائلة، والصحة، والوقت — وما الذي يستحق فعلًا أن يُدفَع.</p></div><span class="st">محور الموسم</span></div>
+      </div>
+      <div style="margin-top:34px" class="rv">
+        <a class="btn btn-ghost" href="#episodes" data-nav="episodes">صفحة الحلقات والأرشيف <span class="arr">←</span></a>
+      </div>
+    </div>
+  </section>
+
+  <hr class="hairline">
+
+  <!-- Nominate CTA -->
+  <section class="block">
+    <div class="wrap cta-band">
+      <div class="rv">
+        <p class="kicker">ترشيح الضيوف</p>
+        <h2 data-words>تعرف قصة بدأت من الصفر؟</h2>
+        <p>أبواب الترشيح مفتوحة. إذا كنت تعرف شخصًا عاش انكسارًا حقيقيًا ونهض منه ليبني شيئًا ذا معنى — أو كانت تلك القصة قصّتك أنت — فنحن نريد أن نسمعها.</p>
+        <div style="margin-top:26px"><a class="btn btn-gold" href="#nominate" data-nav="nominate">رشّح ضيفًا <span class="arr">←</span></a></div>
+      </div>
+      <div class="cta-media rv"><img src="assets/studio.webp" alt="استوديو صِفر: كرسيّان وميكروفون تحت ضوء دافئ في ظلام هادئ" loading="lazy"></div>
+    </div>
+  </section>
+
+  <hr class="hairline">
+
+  <!-- Partners teaser -->
+  <section class="block">
+    <div class="wrap cta-band">
+      <div class="cta-media rv"><img src="assets/doha-skyline.jpg" alt="أبراج الخليج الغربي في الدوحة وقت الغروب" loading="lazy"></div>
+      <div class="rv">
+        <p class="kicker">الرعاية والشراكات</p>
+        <h2 data-words>علامات تؤمن بقوة القصة الحقيقية</h2>
+        <p>نتعاون مع عدد محدود من الشركاء في كل موسم، بصيغ تحترم استقلالية التحرير وثقة الجمهور. لا نبيع وعودًا بأرقام لا نملكها — بل نبني حضورًا يليق بعلامتك وبقصصنا معًا.</p>
+        <div style="margin-top:26px"><a class="btn btn-ghost" href="#partners" data-nav="partners">استكشف فرص الشراكة <span class="arr">←</span></a></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Moving quotes: the season's example lines, in motion -->
+  <div class="marquee rev" aria-hidden="true">
+    <div class="marquee-track">
+      <div class="mq-set">
+        <span class="mq-item quote">«النجاح الذي يستحق أن يُروى، هو الذي كاد ألّا يحدث»</span><span class="mq-tri"></span>
+        <span class="mq-item quote">«هذه ليست قصص نجاح — هذه قصص نهوض»</span><span class="mq-tri"></span>
+        <span class="mq-item quote">«كل إنجاز سبقته نسخة لا يراها أحد»</span><span class="mq-tri"></span>
+        <span class="mq-item quote">«من الصِّفر تبدأ كل الحكايات»</span><span class="mq-tri"></span>
+      </div>
+      <div class="mq-set">
+        <span class="mq-item quote">«النجاح الذي يستحق أن يُروى، هو الذي كاد ألّا يحدث»</span><span class="mq-tri"></span>
+        <span class="mq-item quote">«هذه ليست قصص نجاح — هذه قصص نهوض»</span><span class="mq-tri"></span>
+        <span class="mq-item quote">«كل إنجاز سبقته نسخة لا يراها أحد»</span><span class="mq-tri"></span>
+        <span class="mq-item quote">«من الصِّفر تبدأ كل الحكايات»</span><span class="mq-tri"></span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Closing -->
+  <section class="closing">
+    <div class="bg"><img src="assets/journey.webp" alt="" loading="lazy"></div>
+    <div class="wrap inner">
+      <img class="mark rv" src="assets/logo-ivory.png" alt="شعار صِفر">
+      <h2 class="rv" data-words>هذه ليست قصص نجاح.<br>هذه قصص نهوض.</h2>
+      <p class="rv">«صِفر» يُصنع في الدوحة، ويُروى بالعربية، ويخاطب كل من يقف اليوم عند نقطة البداية. الموسم الأول قادم — وترشيحك قد يكون بدايته.</p>
+      <div class="hero-ctas rv">
+        <a class="btn btn-gold" href="#nominate" data-nav="nominate">رشّح ضيفًا</a>
+        <a class="btn btn-ghost" href="#contact" data-nav="contact">تواصل معنا</a>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ================= EPISODES ================= -->
+<div class="view" id="view-episodes">
+  <section class="page-head">
+    <div class="wrap">
+      <p class="kicker rv">الأرشيف</p>
+      <h1 class="rv" data-words>الحلقات</h1>
+      <p class="lede rv">أرشيف «صِفر» مرقّم من الحلقة الأولى، ومبني ليكبر: كل حلقة برقمها وغلافها ونصّها الكامل وطاقمها — كما تُفتتح الأفلام بشارة أسمائها.</p>
+      <div class="state-legend rv" aria-label="شرح حالات الحلقات">
+        <span><b>قادمة</b> — مُعتمدة في الموسم ولم تُنشر بعد</span>
+        <span><b>منشورة</b> — متاحة للاستماع مع نصّها الكامل</span>
+        <span><b>غير متاحة</b> — سُحبت أو لم تكتمل</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" style="padding-top:10px">
+    <div class="wrap">
+      <div class="empty-state rv">
+        <p class="kicker center">الموسم الأول · العدد ٠١</p>
+        <h2>لا حلقات منشورة بعد — والموسم يُبنى الآن</h2>
+        <p>لن تجد هنا حلقات وهمية بأسماء مخترعة أو مشغّلات لا تعمل. الموسم الأول من «صِفر» قيد الإنتاج في الدوحة، وستظهر حلقاته في هذا الأرشيف — مرقّمة وموثّقة بنصوصها الكاملة — فور نشرها رسميًا.</p>
+        <div class="hero-ctas">
+          <a class="btn btn-gold" href="#nominate" data-nav="nominate">رشّح ضيفًا للموسم الأول</a>
+          <a class="btn btn-ghost" href="#story" data-nav="story">لماذا وُلد «صِفر»؟</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="block">
+    <div class="wrap">
+      <p class="kicker rv">كيف تُبنى كل حلقة</p>
+      <h2 class="rv" style="font-size:clamp(26px,3.4vw,40px);margin:14px 0 30px">معايير ثابتة من الحلقة الأولى</h2>
+      <div class="feature-rows rv">
+        <div class="feature-row"><span class="no">٠١</span><div><h3>ترقيم دائم</h3><p>كل حلقة تحمل رقمها في الأرشيف إلى الأبد — «الحلقة ٠١»، «الحلقة ٠٢» — لأن القصص تُبنى فوق بعضها، والأرشيف ذاكرة البرنامج.</p></div></div>
+        <div class="feature-row"><span class="no">٠٢</span><div><h3>نصّ مكتوب كامل</h3><p>يُنشر النصّ الحرفي لكل حلقة بوصفه مقالًا تحريريًا قابلًا للبحث والقراءة — احترامًا لمن يفضّل القراءة، وبناءً لأرشيف عربي قابل للاكتشاف.</p></div></div>
+        <div class="feature-row"><span class="no">٠٣</span><div><h3>شارة أسماء كاملة</h3><p>تُفتتح صفحة كل حلقة بشارة أسماء على طريقة الأفلام: التقديم، الضيف، تصميم الصوت، ومكان التسجيل — لأن صناعة الصوت حرفة تستحق أن تُنسَب لأصحابها.</p></div></div>
+        <div class="feature-row"><span class="no">٠٤</span><div><h3>روابط استماع حقيقية فقط</h3><p>لا تظهر أزرار التشغيل إلا حين توجد حلقة منشورة فعليًا على منصة استماع. لا واجهات صوتية مزيّفة، ولا عدّادات وهمية.</p></div></div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ================= STORY ================= -->
+<div class="view" id="view-story">
+  <section class="page-head">
+    <div class="wrap">
+      <p class="kicker rv">قصّتنا</p>
+      <h1 class="rv" data-words>لماذا يوجد «صِفر»؟</h1>
+      <p class="lede rv">لأن قصص النجاح كما تُروى عادةً تبدأ من منتصف الطريق. تُختصر السنوات الصعبة في جملة، ويُقدَّم الإنجاز وكأنه كان محتومًا. نحن نؤمن أن الحقيقة أجمل — وأفيد — من ذلك بكثير.</p>
+    </div>
+  </section>
+
+  <section class="block" style="padding-top:6px">
+    <div class="wrap chapter-grid">
+      <div class="rv">
+        <p class="kicker">الملاحظة التي بدأ منها كل شيء</p>
+        <h2 style="font-size:clamp(26px,3.4vw,40px);margin:14px 0">كل إنجاز يراه العالم،<br>سبقته نسخة لا يراها أحد</h2>
+        <p style="color:var(--ivory-dim);font-weight:300">وراء كل مؤسِّس بنى شركة من العدم، وكل رياضي عاد من إصابة أنهت مسيرته، وكل إنسان أعاد بناء حياته بعد خسارة فادحة — توجد فترة مظلمة لم تُوثَّق: قرارات خاطئة، وديون، ووحدة، وشكّ في كل شيء. تلك الفترة ليست هامشًا في القصة؛ إنها القصة ذاتها. «صِفر» وُلد ليمنحها الميكروفون.</p>
+        <blockquote class="pullquote">«من الدوحة، وبالعربية، نروي الرحلة الإنسانية خلف الإنجاز — بلا تجميل، وبلا اختصار.»</blockquote>
+      </div>
+      <div class="chapter-media rv"><img src="assets/journey.webp" alt="شخص وحيد يقف في الظلام مواجهًا شعاع ضوء بعيدًا — رمز نقطة البداية" loading="lazy"></div>
+    </div>
+  </section>
+
+  <section class="block">
+    <div class="wrap">
+      <p class="kicker rv">مبادئنا التحريرية</p>
+      <h2 class="rv" style="font-size:clamp(26px,3.4vw,40px);margin:14px 0 32px">ثلاثة مبادئ لا تتغيّر</h2>
+      <div class="principles rv">
+        <div class="principle"><span class="no">٠١</span><h3>الصدق قبل الإبهار</h3><p>لا أسئلة مُتّفق عليها مسبقًا لتلميع الصورة، ولا قصص تُعاد صياغتها لتبدو أجمل. ما ستسمعه هو ما حدث — بانكساراته قبل انتصاراته.</p></div>
+        <div class="principle"><span class="no">٠٢</span><h3>العمق قبل الانتشار</h3><p>حوار واحد طويل في كل حلقة، بلا مقاطعات استعراضية. نفضّل ساعتين من الحقيقة على عشرين مقطعًا سريعًا مصمّمًا للخوارزميات.</p></div>
+        <div class="principle"><span class="no">٠٣</span><h3>الحرفة قبل كل شيء</h3><p>تصميم صوت سينمائي، وتحرير صارم، وتوثيق كامل بالنصوص المكتوبة. الجودة ليست طبقة أخيرة نضيفها — إنها طريقة العمل من اليوم الأول.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" style="padding-top:0">
+    <div class="wrap">
+      <div class="credits rv">
+        <p class="kicker">بطاقة تعريف</p>
+        <dl style="margin-top:20px">
+          <div><dt>الاسم</dt><dd>صِفر — <span lang="en">ZERO Podcast</span></dd></div>
+          <div><dt>النوع</dt><dd>بودكاست حواري تحريري</dd></div>
+          <div><dt>اللغة</dt><dd>العربية أولًا</dd></div>
+          <div><dt>المنشأ والتسجيل</dt><dd>الدوحة، قطر</dd></div>
+          <div><dt>الإصدار</dt><dd>مواسم مرقّمة كأعداد</dd></div>
+          <div><dt>الحالة</dt><dd>الموسم الأول — قيد الإنتاج</dd></div>
+        </dl>
+      </div>
+      <div class="cta-band rv" style="padding-bottom:0">
+        <div>
+          <h2>القصة التالية قد تكون قصّتك</h2>
+          <p>ترشيحات الضيوف هي شريان الموسم الأول. إذا عشت الرحلة من الصفر — أو تعرف من عاشها — فهذا هو المكان.</p>
+        </div>
+        <div><a class="btn btn-gold" href="#nominate" data-nav="nominate">رشّح ضيفًا <span class="arr">←</span></a></div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ================= NOMINATE ================= -->
+<div class="view" id="view-nominate">
+  <section class="page-head">
+    <div class="wrap">
+      <p class="kicker rv">ترشيح ضيف</p>
+      <h1 class="rv" data-words>رشّح قصة تستحق أن تُروى</h1>
+      <p class="lede rv">نبحث عن رحلات حقيقية: بدايات من العدم، انكسارات موثّقة بالتجربة، ونهوض لم يكن مضمونًا. رشّح نفسك أو شخصًا تعرفه — واكتب لنا لماذا هذه القصة بالذات.</p>
+    </div>
+  </section>
+
+  <section class="block" style="padding-top:6px">
+    <div class="wrap form-shell">
+      <form id="nominateForm" novalidate>
+        <div class="field" data-req>
+          <label for="f-nominator">اسمك الكريم <span class="req">*</span></label>
+          <input id="f-nominator" name="nominator" type="text" autocomplete="name" placeholder="الاسم الكامل">
+          <p class="err">فضلًا أدخل اسمك.</p>
+        </div>
+        <div class="field" data-req>
+          <label for="f-contact">بريدك الإلكتروني <span class="req">*</span></label>
+          <input id="f-contact" name="contact" type="email" autocomplete="email" dir="ltr" style="text-align:end" placeholder="name@example.com">
+          <p class="hint">وسيلة التواصل الوحيدة التي سنستخدمها للرد على هذا الترشيح.</p>
+          <p class="err">فضلًا أدخل بريدًا إلكترونيًا صحيحًا.</p>
+        </div>
+        <div class="field" data-req>
+          <label for="f-guest">اسم الضيف المقترح <span class="req">*</span></label>
+          <input id="f-guest" name="guest" type="text" placeholder="اسم الشخص الذي ترشّحه">
+          <p class="err">فضلًا أدخل اسم الضيف المقترح.</p>
+        </div>
+        <div class="field">
+          <label for="f-field">مجال الضيف أو صفته</label>
+          <input id="f-field" name="field" type="text" placeholder="مثال: مؤسِّس شركة، رياضي، فنّان، طبيب…">
+        </div>
+        <div class="field" data-req>
+          <label for="f-story">لماذا تستحق هذه القصة أن تُروى؟ <span class="req">*</span></label>
+          <textarea id="f-story" name="story" placeholder="حدّثنا عن نقطة البداية، ولحظة الانكسار، وكيف نهض صاحب القصة. كلما كنت محددًا، كان الترشيح أقوى."></textarea>
+          <p class="err">فضلًا اكتب نبذة عن القصة (٢٠ حرفًا على الأقل).</p>
+        </div>
+        <div class="field">
+          <label for="f-link">رابط داعم (اختياري)</label>
+          <input id="f-link" name="link" type="url" dir="ltr" style="text-align:end" placeholder="https://…">
+          <p class="hint">مقال، مقابلة سابقة، أو صفحة تعريفية بالضيف — إن وُجدت.</p>
+        </div>
+        <div class="form-note" style="margin-bottom:26px">
+          <strong style="color:var(--ivory)">عن الخصوصية والإرسال:</strong>
+          قناة الاستقبال الرسمية لترشيحات «صِفر» لم تُفعَّل بعد، لذلك لا يُرسَل هذا النموذج إلى أي خادم ولا تُحفَظ بياناتك في أي مكان. عند الضغط على «تجهيز الترشيح» ستُنسَّق بياناتك في وثيقة ترشيح جاهزة يمكنك تنزيلها والاحتفاظ بها — وإرسالها إلينا فور إعلان قناة الاستقبال مع إطلاق الموسم الأول.
+        </div>
+        <button class="btn btn-gold" type="submit" style="border:0">تجهيز الترشيح <span class="arr">←</span></button>
+      </form>
+
+      <div class="form-result" id="nominateResult" role="status">
+        <h3>ترشيحك جاهز</h3>
+        <p style="color:var(--ivory-dim);font-weight:300">هذه هي وثيقة ترشيحك بصيغتها النهائية. نزّلها الآن واحتفظ بها — وستتمكّن من إرسالها فور تفعيل قناة الاستقبال الرسمية. شكرًا لأنك شاركتنا قصة تستحق أن تُسمَع.</p>
+        <pre id="nominateText"></pre>
+        <div class="result-actions">
+          <button class="mini-btn" type="button" id="nominateDownload">تنزيل وثيقة الترشيح</button>
+          <button class="mini-btn" type="button" id="nominateCopy">نسخ النص</button>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ================= PARTNERS ================= -->
+<div class="view" id="view-partners">
+  <section class="page-head">
+    <div class="wrap">
+      <p class="kicker rv">الرعاية والشراكات</p>
+      <h1 class="rv" data-words>شراكة تُبنى على القصة،<br>لا على الضجيج</h1>
+      <p class="lede rv">«صِفر» منصة تحريرية في طور الإطلاق من الدوحة. نتعاون مع عدد محدود من العلامات التي تشاركنا الإيمان بالمحتوى العربي العميق — ونصمّم كل شراكة بما يحفظ استقلالية التحرير أولًا.</p>
+    </div>
+  </section>
+
+  <section class="block" style="padding-top:6px">
+    <div class="wrap">
+      <div class="principles rv">
+        <div class="principle"><span class="no">٠١</span><h3>شريك الموسم</h3><p>حضور مؤسِّس عبر عدد كامل من «صِفر»: ارتباط باسم الموسم وغلافه وحملته، بصياغة تحريرية راقية لا تقاطع الحوار.</p></div>
+        <div class="principle"><span class="no">٠٢</span><h3>شراكة حلقات مختارة</h3><p>ارتباط بحلقة أو محور بعينه من محاور الموسم حين تلتقي قصة الضيف مع عالم علامتك بشكل طبيعي وصادق.</p></div>
+        <div class="principle"><span class="no">٠٣</span><h3>فعاليات ومحتوى مشترك</h3><p>جلسات حوار حيّة وتسجيلات خاصة أمام جمهور مختار، ومحتوى وثائقي قصير مشتق من عالم «صِفر» وقصصه.</p></div>
+      </div>
+
+      <div class="two-col" style="margin-top:60px">
+        <div class="rv">
+          <p class="kicker">ما نلتزم به</p>
+          <h2 style="font-size:clamp(24px,3vw,34px);margin:14px 0 14px">مصداقية بلا مساومة</h2>
+          <p style="color:var(--ivory-dim);font-weight:300">لن نعرض أرقام مشاهدات أو جمهورًا لا نملكه، ولن نعد بنتائج تجارية لا يستطيع أحد ضمانها. «صِفر» برنامج جديد، وقيمته التي نقدّمها اليوم حقيقية وواضحة: قصص استثنائية، وحرفة إنتاج عالية، وارتباط مبكر بعلامة عربية طموحة منذ موسمها الأول. الرعاية لا تشتري سؤالًا واحدًا في أي حوار — وهذا بالضبط ما يجعل الحضور معنا ذا قيمة.</p>
+        </div>
+        <div class="rv">
+          <p class="kicker">لمن تناسب الشراكة؟</p>
+          <h2 style="font-size:clamp(24px,3vw,34px);margin:14px 0 14px">علامات تفكّر طويلًا</h2>
+          <p style="color:var(--ivory-dim);font-weight:300">إذا كانت علامتك تستثمر في ريادة الأعمال، والثقافة، والتعليم، أو قصص النهوض الإنساني — وإذا كنت تفضّل الحضور الهادئ الواثق على الإعلانات الصاخبة — فغالبًا سنكون مناسبين لبعضنا. جهّز موجز استفسارك بالأسفل، وسيكون جاهزًا للإرسال فور تفعيل قناة الشراكات الرسمية.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" style="padding-top:0">
+    <div class="wrap form-shell">
+      <p class="kicker rv">استفسار شراكة</p>
+      <h2 class="rv" style="font-size:clamp(24px,3vw,34px);margin:14px 0 30px">جهّز موجز الاستفسار</h2>
+      <form id="partnerForm" novalidate>
+        <div class="field" data-req>
+          <label for="p-org">الجهة / العلامة التجارية <span class="req">*</span></label>
+          <input id="p-org" name="org" type="text" autocomplete="organization" placeholder="اسم الشركة أو المؤسسة">
+          <p class="err">فضلًا أدخل اسم الجهة.</p>
+        </div>
+        <div class="field" data-req>
+          <label for="p-name">اسم مسؤول التواصل <span class="req">*</span></label>
+          <input id="p-name" name="pname" type="text" autocomplete="name" placeholder="الاسم الكامل">
+          <p class="err">فضلًا أدخل اسم مسؤول التواصل.</p>
+        </div>
+        <div class="field" data-req>
+          <label for="p-email">البريد المهني <span class="req">*</span></label>
+          <input id="p-email" name="pemail" type="email" autocomplete="email" dir="ltr" style="text-align:end" placeholder="name@company.com">
+          <p class="err">فضلًا أدخل بريدًا مهنيًا صحيحًا.</p>
+        </div>
+        <div class="field">
+          <label for="p-type">صيغة الشراكة المهتم بها</label>
+          <select id="p-type" name="ptype">
+            <option>شريك الموسم</option>
+            <option>شراكة حلقات مختارة</option>
+            <option>فعاليات ومحتوى مشترك</option>
+            <option>أخرى / لم نقرر بعد</option>
+          </select>
+        </div>
+        <div class="field" data-req>
+          <label for="p-msg">رسالتك <span class="req">*</span></label>
+          <textarea id="p-msg" name="pmsg" placeholder="عرّف بعلامتك، وسبب اهتمامك بـ«صِفر»، وما الذي تتصوّره لهذه الشراكة."></textarea>
+          <p class="err">فضلًا اكتب رسالة موجزة (٢٠ حرفًا على الأقل).</p>
+        </div>
+        <div class="form-note" style="margin-bottom:26px">
+          <strong style="color:var(--ivory)">تنبيه صادق:</strong>
+          قناة استقبال استفسارات الشراكات لم تُفعَّل بعد، ولا يُرسَل هذا النموذج إلى أي جهة. سيُنسَّق موجزك في وثيقة جاهزة للتنزيل والاحتفاظ بها حتى إعلان القناة الرسمية.
+        </div>
+        <button class="btn btn-gold" type="submit" style="border:0">تجهيز موجز الاستفسار <span class="arr">←</span></button>
+      </form>
+
+      <div class="form-result" id="partnerResult" role="status">
+        <h3>موجزك جاهز</h3>
+        <p style="color:var(--ivory-dim);font-weight:300">نزّل وثيقة الاستفسار واحتفظ بها — وستتمكّن من إرسالها فور تفعيل قناة الشراكات الرسمية مع إطلاق الموسم الأول.</p>
+        <pre id="partnerText"></pre>
+        <div class="result-actions">
+          <button class="mini-btn" type="button" id="partnerDownload">تنزيل موجز الاستفسار</button>
+          <button class="mini-btn" type="button" id="partnerCopy">نسخ النص</button>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ================= CONTACT ================= -->
+<div class="view" id="view-contact">
+  <section class="page-head">
+    <div class="wrap">
+      <p class="kicker rv">تواصل</p>
+      <h1 class="rv" data-words>تحدّث معنا</h1>
+      <p class="lede rv">«صِفر» يُبنى الآن في الدوحة. قنوات التواصل الرسمية — البريد والحسابات الاجتماعية — ستُعلن هنا بأسمائها الموثّقة مع إطلاق الموسم الأول، ولن ننشر أي عنوان قبل التأكد من ملكيته وتفعيله.</p>
+    </div>
+  </section>
+
+  <section class="block" style="padding-top:6px">
+    <div class="wrap">
+      <div class="credits rv" style="margin-bottom:44px">
+        <p class="kicker">بطاقة التواصل الحالية</p>
+        <dl style="margin-top:20px">
+          <div><dt>المقرّ والتسجيل</dt><dd>الدوحة، قطر</dd></div>
+          <div><dt>البريد الرسمي</dt><dd style="color:var(--grey)">يُعلن مع إطلاق الموسم الأول</dd></div>
+          <div><dt>الحسابات الاجتماعية</dt><dd style="color:var(--grey)">تُعلن بأسمائها الموثّقة قريبًا</dd></div>
+          <div><dt>حالة الاستقبال</dt><dd>الترشيحات والشراكات عبر النماذج أدناه</dd></div>
+        </dl>
+      </div>
+
+      <div class="two-col">
+        <div class="rv" style="border:1px solid var(--line);border-radius:12px;padding:32px 30px;background:var(--coal)">
+          <p class="kicker">للضيوف والقصص</p>
+          <h2 style="font-size:24px;margin:12px 0 10px">ترشيح ضيف</h2>
+          <p style="color:var(--grey);font-weight:300;margin-bottom:22px">أسرع طريق للوصول إلى فريق التحرير الآن هو نموذج الترشيح — تُحضَّر وثيقتك كاملة وجاهزة للإرسال عند تفعيل القناة.</p>
+          <a class="btn btn-gold" href="#nominate" data-nav="nominate">إلى نموذج الترشيح <span class="arr">←</span></a>
+        </div>
+        <div class="rv" style="border:1px solid var(--line);border-radius:12px;padding:32px 30px;background:var(--coal)">
+          <p class="kicker">للعلامات والمؤسسات</p>
+          <h2 style="font-size:24px;margin:12px 0 10px">استفسارات الشراكة</h2>
+          <p style="color:var(--grey);font-weight:300;margin-bottom:22px">للرعاية والتعاون المؤسسي، جهّز موجز استفسارك من صفحة الشراكات وسيصلك إلى الفريق فور تفعيل قناة الشراكات.</p>
+          <a class="btn btn-ghost" href="#partners" data-nav="partners">إلى صفحة الشراكات <span class="arr">←</span></a>
+        </div>
+      </div>
+
+      <div class="rv" style="margin-top:54px;border-radius:12px;overflow:hidden;border:1px solid var(--line)">
+        <img src="assets/doha-skyline.jpg" alt="الدوحة — الخليج الغربي عند الغسق، حيث يُسجَّل «صِفر»" loading="lazy" style="width:100%;aspect-ratio:21/9;object-fit:cover">
+      </div>
+      <p class="rv" style="color:var(--grey);font-size:13.5px;margin-top:12px">الدوحة، قطر — صورة أفق الخليج الغربي عند الغسق (مصدرها: Kane Bridge News Middle East).</p>
+    </div>
+  </section>
+</div>
+
+<!-- ================= DESIGN & RESEARCH ================= -->
+<div class="view" id="view-research">
+  <section class="page-head">
+    <div class="wrap">
+      <p class="kicker rv">منهج التصميم</p>
+      <h1 class="rv" data-words>كيف صُمِّم هذا الموقع</h1>
+      <p class="lede rv">بُني هذا الموقع على بحث معمّق في مراجع عالمية للتصميم السينمائي والتحريري وتجارب الويب العربية، أُجري في ٢٤ أكتوبر ٢٠٢٦. القاعدة الحاكمة: ضبطٌ واثق، ووسيلة سينمائية واحدة في كل صفحة — لا زخرفة بلا معنى. فيما يلي أهم المراجع وما ألهمته من قرارات أصلية في «صِفر»، بشفافية كاملة حول حدود التحقق.</p>
+    </div>
+  </section>
+
+  <section class="block" style="padding-top:6px">
+    <div class="wrap">
+      <div style="overflow-x:auto">
+      <table class="matrix rv">
+        <thead><tr><th>المرجع</th><th>أقوى فكرة فيه</th><th>القرار الأصلي في «صِفر»</th><th>ما لم ننسخه</th></tr></thead>
+        <tbody>
+          <tr>
+            <td>ثمانية — Thmanyah<br><a href="https://thmanyah.com/" target="_blank" rel="noopener">thmanyah.com</a></td>
+            <td>منتجات تحريرية عربية مُسمّاة داخل بيت واحد، وبنية معلومات وُلدت بالعربية لا مترجمة إليها.</td>
+            <td>بنية عربية أولًا من الأساس: التخطيط والترقيم وإيقاع الأسطر مضبوطة للعربية (ارتفاع سطر ١٫٨٥، بلا تباعد أحرف)، والإنجليزية لاحقة عند الحاجة.</td>
+            <td>كثافة الصفحة الرئيسية الناشرية — «صِفر» يعمل بعُشر العناصر في الشاشة.</td>
+          </tr>
+          <tr>
+            <td>A24 Films<br><a href="https://a24films.com/" target="_blank" rel="noopener">a24films.com</a></td>
+            <td>شارة الأسماء بوصفها الواجهة الكاملة للعمل: العنوان، التاريخ، الطاقم — بلا أي سطر تسويقي.</td>
+            <td>شارة أسماء فيلمية تتصدّر صفحة كل حلقة: التقديم / الضيف / تصميم الصوت / مكان التسجيل.</td>
+            <td>ضعف القابلية للاكتشاف والتنقل الغامض.</td>
+          </tr>
+          <tr>
+            <td>Kinfolk<br><a href="https://www.kinfolk.com/" target="_blank" rel="noopener">kinfolk.com</a></td>
+            <td>العدد المرقّم بوصفه بديل الخلاصة اللانهائية: ندرة واكتمال بوصفهما فخامة.</td>
+            <td>المواسم عندنا «أعداد» لها غلاف ومحتويات وخاتمة، والرئيسية تعرض العدد الحالي لا «أحدث الحلقات».</td>
+            <td>إخفاء الصوت شبه الكامل — الاستماع عندنا يبقى حاضرًا دائمًا.</td>
+          </tr>
+          <tr>
+            <td>99% Invisible<br><a href="https://99percentinvisible.org/" target="_blank" rel="noopener">99percentinvisible.org</a></td>
+            <td>أرشيف مرقّم ومصنّف، ونصوص مكتوبة كاملة بوصفها منتجًا أساسيًا لا ملحقًا.</td>
+            <td>الترقيم والنصوص الكاملة بنية تحتية للعلامة منذ الحلقة الأولى — أصل عربي قابل للبحث لا يُشترى لاحقًا.</td>
+            <td>التقشّف البصري — علامة جديدة تحتاج إخراجًا فنيًا يكسب الانتباه.</td>
+          </tr>
+          <tr>
+            <td>Apple — AirPods Pro<br><a href="https://www.apple.com/airpods-pro/" target="_blank" rel="noopener">apple.com/airpods-pro</a></td>
+            <td>تسلسل إطارات يتحكّم فيه التمرير: القارئ هو من «يُشغّل» الفيلم.</td>
+            <td>وسيلة سينمائية واحدة مهيمنة في الموقع كله — فيلم الهوية في الافتتاح — وكل ما عداه حركة هادئة. الندرة هي ما يجعلها غالية.</td>
+            <td>سجلّ مواصفات المنتج ووزن الأصول الهائل.</td>
+          </tr>
+          <tr>
+            <td>Audemars Piguet — House of Wonders<br><a href="https://www.awwwards.com/sites/the-house-of-wonders" target="_blank" rel="noopener">awwwards.com</a></td>
+            <td>التراث بوصفه فضاءً يُستكشف: غرف بدل الجداول الزمنية (موقع اليوم في Awwwards، ديسمبر ٢٠٢٥).</td>
+            <td>السرد عندنا «فصول» تُقطع بالتمرير — العدم، السقوط، التحوّل، النهوض — لا أقسام ويب تقليدية.</td>
+            <td>الألعاب والمكافآت، وثقل التجربة ثلاثية الأبعاد الكاملة.</td>
+          </tr>
+          <tr>
+            <td>Zaha Hadid Architects<br><a href="https://www.zaha-hadid.com/" target="_blank" rel="noopener">zaha-hadid.com</a></td>
+            <td>فهرس مرقّم («٠١ / ١٦») وصورة واحدة لكل فكرة — إيقاع متحفي.</td>
+            <td>محتويات الموسم وفصول السرد مرقّمة بالأرقام العربية المشرقية، ولقطة واحدة كبيرة لكل فكرة.</td>
+            <td>بنية معارض الصور التي تخفي فعل الاستماع وبيانات الحلقة.</td>
+          </tr>
+          <tr>
+            <td>Louvre Abu Dhabi<br><a href="https://www.louvreabudhabi.ae/" target="_blank" rel="noopener">louvreabudhabi.ae</a></td>
+            <td>مفردة ضوئية واحدة قابلة للتملّك تتكرّر حتى تصبح هي العلامة.</td>
+            <td>مفردة «صِفر» الضوئية: عمود ضوء دافئ واحد في ظلام فحمي — في الاستوديو، وفيلم الهوية، وكل اللقطات.</td>
+            <td>قبة «مطر الضوء» نفسها — إنها ملكية اللوفر، لا إشارة فخامة عامة.</td>
+          </tr>
+        </tbody>
+      </table>
+      </div>
+
+      <div class="two-col" style="margin-top:64px">
+        <div class="rv">
+          <p class="kicker">الخطوط والتراخيص</p>
+          <h2 style="font-size:24px;margin:12px 0 12px">حروف عربية بتراخيص نظيفة</h2>
+          <p style="color:var(--ivory-dim);font-weight:300">العناوين بخط <strong style="color:var(--ivory)">Noto Kufi Arabic</strong>، والنصوص والواجهة بخط <strong style="color:var(--ivory)">IBM Plex Sans Arabic</strong>، والاقتباسات بخط <strong style="color:var(--ivory)">Amiri</strong> — جميعها مفتوحة المصدر بترخيص SIL OFL 1.1 ومتاحة عبر Google Fonts. لا يُطبَّق تباعد الأحرف على العربية أبدًا لأنه يكسر اتصال الحروف، وارتفاع السطر النصي مضبوط عند ١٫٨٥ تقريبًا.</p>
+        </div>
+        <div class="rv">
+          <p class="kicker">الحركة والهندسة</p>
+          <h2 style="font-size:24px;margin:12px 0 12px">حركة تخدم السرد فقط</h2>
+          <p style="color:var(--ivory-dim);font-weight:300">كل نصّ في الموقع يتحرّك: العناوين تنكشف كلمةً كلمة، ونصوص الأمثلة والفقرات تتدفّق بإيقاع أسرع، وصفوف المحاور والبطاقات تدخل متتابعةً واحدةً تلو الأخرى، وشريطا كلمات وأقوال يتحرّكان بلا توقّف — وكلها حركة تحوّلات وشفافية فقط (transform وopacity) صُمّمت على أنماط موثّقة من مكتبات مفتوحة مدروسة: <a href="https://github.com/darkroomengineering/lenis" target="_blank" rel="noopener" style="color:var(--gold)">Lenis</a> و<a href="https://github.com/locomotivemtl/locomotive-scroll" target="_blank" rel="noopener" style="color:var(--gold)">Locomotive Scroll</a> (ترخيص MIT) و<a href="https://github.com/greensock/GSAP" target="_blank" rel="noopener" style="color:var(--gold)">GSAP / ScrollTrigger</a> (ترخيص GreenSock المجاني) — مع احترام كامل لتفضيل تقليل الحركة، وبقاء كل المحتوى مقروءًا بلا أي حركة.</p>
+        </div>
+      </div>
+
+      <div class="form-note rv" style="margin-top:44px">
+        <strong style="color:var(--ivory)">ملاحظة تحقق:</strong>
+        في جلسة البحث (٢٤ أكتوبر ٢٠٢٦) تعذّر فتح المواقع المرجعية عبر متصفح مباشر بسبب عطل في حلّ أسماء النطاقات، فاعتُمدت قراءة النصوص الكاملة عبر فهرس الويب في اليوم نفسه لجميع المراجع أعلاه. مرجعان وردا في البحث بقراءة جزئية (Radiolab وJacquemus) ولم تُبنَ عليهما قرارات هنا. مرجع SBS «The Boat» موثّق عبر مصدر ثانوي (Smashing Magazine) فقط ولم يُستخدم.
+      </div>
+    </div>
+  </section>
+</div>
+</main>
+
+<!-- ================= FOOTER ================= -->
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <img src="assets/logo-ivory.png" alt="شعار صِفر">
+        <p>بودكاست حواري عربي من الدوحة — عن الرحلة الإنسانية خلف النجاح: السقوط، والشك، والنهوض من الصفر.</p>
+      </div>
+      <div>
+        <h4>الموقع</h4>
+        <ul>
+          <li><a href="#home" data-nav="home">الرئيسية</a></li>
+          <li><a href="#episodes" data-nav="episodes">الحلقات</a></li>
+          <li><a href="#story" data-nav="story">قصّتنا</a></li>
+          <li><a href="#research" data-nav="research">منهج التصميم والبحث</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>شارك</h4>
+        <ul>
+          <li><a href="#nominate" data-nav="nominate">ترشيح ضيف</a></li>
+          <li><a href="#partners" data-nav="partners">الرعاية والشراكات</a></li>
+          <li><a href="#contact" data-nav="contact">تواصل</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot-base">
+      <span>© ٢٠٢٦ صِفر — ZERO Podcast · الدوحة، قطر</span>
+      <span>الموسم الأول قيد الإنتاج · تُعلن القنوات الرسمية عند الإطلاق</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  "use strict";
+  window.__zeroMain = true; /* health flag read by the open-guarantee script */
+  var reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  /* ---------- routing ---------- */
+  var VIEWS = ["home","episodes","story","nominate","partners","contact","research"];
+  var rail = document.getElementById("chapterRail");
+  var railFill = document.getElementById("railFill");
+  var currentView = null;
+
+  function viewFromHash(){
+    var h = (location.hash || "#home").replace("#","");
+    if (VIEWS.indexOf(h) !== -1) return h;
+    if (["ch-1","ch-2","ch-3","ch-4"].indexOf(h) !== -1) return "home";
+    return "home";
+  }
+  function show(view, anchor){
+    currentView = view;
+    VIEWS.forEach(function(v){
+      document.getElementById("view-"+v).classList.toggle("active", v === view);
+    });
+    document.querySelectorAll("[data-nav]").forEach(function(a){
+      if (a.getAttribute("data-nav") === view && a.closest(".main-nav")) a.setAttribute("aria-current","page");
+      else if (a.closest(".main-nav")) a.removeAttribute("aria-current");
+    });
+    rail.classList.toggle("show", view === "home");
+    closeMenu();
+    if (anchor){
+      var el = document.getElementById(anchor);
+      if (el) { el.scrollIntoView({behavior: reduced ? "auto" : "smooth"}); return; }
+    }
+    window.scrollTo({top:0, behavior:"auto"});
+    refreshReveals();
+    initWords();
+  }
+  window.addEventListener("hashchange", function(){
+    var h = (location.hash || "").replace("#","");
+    if (["ch-1","ch-2","ch-3","ch-4"].indexOf(h) !== -1 && currentView === "home"){
+      var el = document.getElementById(h);
+      if (el) el.scrollIntoView({behavior: reduced ? "auto" : "smooth"});
+      return;
+    }
+    show(viewFromHash());
+  });
+
+  /* ---------- mobile menu ---------- */
+  var menuBtn = document.getElementById("menuBtn");
+  var mainNav = document.getElementById("mainNav");
+  function closeMenu(){
+    mainNav.classList.remove("open");
+    menuBtn.setAttribute("aria-expanded","false");
+    menuBtn.textContent = "☰";
+  }
+  menuBtn.addEventListener("click", function(){
+    var open = mainNav.classList.toggle("open");
+    menuBtn.setAttribute("aria-expanded", open ? "true" : "false");
+    menuBtn.textContent = open ? "✕" : "☰";
+  });
+
+  /* ---------- header on scroll ---------- */
+  var head = document.getElementById("siteHead");
+  window.addEventListener("scroll", function(){
+    head.classList.toggle("scrolled", window.scrollY > 30);
+    updateRail();
+  }, {passive:true});
+
+  /* ---------- chapter rail ---------- */
+  var chapters = ["ch-1","ch-2","ch-3","ch-4"];
+  function updateRail(){
+    if (currentView !== "home") return;
+    var vh = window.innerHeight, active = null, firstTop = null, lastBot = null;
+    chapters.forEach(function(id, i){
+      var el = document.getElementById(id);
+      if (!el) return;
+      var r = el.getBoundingClientRect();
+      if (i === 0) firstTop = r.top;
+      if (i === chapters.length - 1) lastBot = r.bottom;
+      if (r.top < vh * 0.55 && r.bottom > vh * 0.45) active = id;
+    });
+    document.querySelectorAll(".chapter-rail a").forEach(function(a){
+      a.classList.toggle("on", a.getAttribute("data-ch") === active);
+    });
+    if (firstTop !== null && lastBot !== null){
+      var total = lastBot - firstTop, done = Math.min(Math.max(vh * 0.5 - firstTop, 0), total);
+      railFill.style.height = (total > 0 ? (done / total) * 100 : 0) + "%";
+    }
+  }
+
+  /* ---------- scroll reveals + parallax ---------- */
+  var io = null;
+  function refreshReveals(){
+    var els = document.querySelectorAll(".view.active .rv:not(.in)");
+    if (reduced || !("IntersectionObserver" in window)){
+      els.forEach(function(el){ el.classList.add("in"); });
+      return;
+    }
+    if (!io){
+      io = new IntersectionObserver(function(entries){
+        entries.forEach(function(e){
+          if (e.isIntersecting){ e.target.classList.add("in"); io.unobserve(e.target); }
+        });
+      }, {threshold: 0.12, rootMargin: "0px 0px -6% 0px"});
+    }
+    els.forEach(function(el){ io.observe(el); });
+  }
+
+  /* ---------- word-by-word text motion ----------
+     Applied to every heading plus the example/body texts (season themes,
+     episode standards, principles, pull-quotes, ledes) so all wording on
+     the site moves — headlines in a slow rhythm, body text in a fast one. */
+  var wordsIO = null;
+  var WORD_FAST_SEL = ".contents-row p, .feature-row p, .principle p, .pullquote, .lede, .manifesto .sig, .empty-state p";
+  function splitWords(el){
+    if (el.getAttribute("data-split") === "1") return;
+    el.setAttribute("data-split", "1");
+    el.classList.add("words");
+    if (el.matches(WORD_FAST_SEL)) el.classList.add("words-fast");
+    var idx = 0;
+    function wrapWord(node){
+      var w = document.createElement("span");
+      w.className = "w";
+      var wi = document.createElement("span");
+      wi.className = "wi";
+      wi.style.setProperty("--i", idx++);
+      wi.appendChild(node);
+      w.appendChild(wi);
+      return w;
+    }
+    Array.prototype.slice.call(el.childNodes).forEach(function(node){
+      if (node.nodeType === 3){
+        var frag = document.createDocumentFragment();
+        node.textContent.split(/(\s+)/).forEach(function(part){
+          if (!part) return;
+          if (/^\s+$/.test(part)) frag.appendChild(document.createTextNode(" "));
+          else frag.appendChild(wrapWord(document.createTextNode(part)));
+        });
+        el.replaceChild(frag, node);
+      } else if (node.nodeType === 1 && node.tagName !== "BR"){
+        el.replaceChild(wrapWord(node), node);
+      }
+    });
+  }
+  function initWords(){
+    var seen = [], els = [];
+    ["[data-words]", "h2", "h3", ".contents-row p", ".feature-row p", ".principle p", ".pullquote", ".lede", ".manifesto .sig"].forEach(function(sel){
+      document.querySelectorAll(".view.active " + sel).forEach(function(el){
+        if (el.classList.contains("hero-in")) return; /* first-screen copy: CSS entrance only, never split */
+        if (seen.indexOf(el) === -1){ seen.push(el); els.push(el); }
+      });
+    });
+    if (reduced || !("IntersectionObserver" in window)){
+      els.forEach(function(el){ el.classList.add("words", "in"); });
+      return;
+    }
+    els.forEach(splitWords);
+    if (!wordsIO){
+      wordsIO = new IntersectionObserver(function(entries){
+        entries.forEach(function(e){
+          if (e.isIntersecting){ e.target.classList.add("in"); wordsIO.unobserve(e.target); }
+        });
+      }, {threshold: 0.2});
+    }
+    els.forEach(function(el){ if (!el.classList.contains("in")) wordsIO.observe(el); });
+  }
+
+  var pEls = [];
+  function collectParallax(){
+    pEls = Array.prototype.slice.call(document.querySelectorAll(".view.active img.parallax"));
+  }
+  var ticking = false;
+  function parallax(){
+    if (reduced) return;
+    var vh = window.innerHeight;
+    pEls.forEach(function(img){
+      var r = img.parentElement.getBoundingClientRect();
+      if (r.bottom < -100 || r.top > vh + 100) return;
+      var p = (r.top + r.height / 2 - vh / 2) / vh; /* -0.5 .. 0.5 */
+      img.style.transform = "scale(1.12) translateY(" + (p * -22) + "px)";
+    });
+  }
+  window.addEventListener("scroll", function(){
+    if (!ticking){ ticking = true; requestAnimationFrame(function(){ parallax(); ticking = false; }); }
+  }, {passive:true});
+
+  /* ---------- early init: activate the routed view NOW, before any
+     optional wiring below (film buttons, forms). If anything later in
+     this script fails, the page is already open and readable. ------- */
+  show(viewFromHash(), (location.hash || "").replace("#","").indexOf("ch-") === 0 ? location.hash.replace("#","") : null);
+  updateRail();
+
+  /* ---------- hero film ---------- */
+  var video = document.getElementById("heroVideo");
+  function tryAutoplay(){
+    if (!video || reduced) return;
+    video.muted = true;
+    var pr = video.play();
+    if (pr && pr.catch) pr.catch(function(){ /* poster remains; tools still work */ });
+  }
+  var replayBtn = document.getElementById("replayBtn");
+  if (replayBtn) replayBtn.addEventListener("click", function(){
+    if (!video) return;
+    video.currentTime = 0; video.muted = true; video.loop = true;
+    video.play();
+  });
+  var soundBtn = document.getElementById("soundBtn");
+  if (soundBtn) soundBtn.addEventListener("click", function(){
+    if (!video) return;
+    video.currentTime = 0; video.muted = false; video.loop = false;
+    var pr = video.play();
+    if (pr && pr.catch) pr.catch(function(){ video.muted = true; video.loop = true; video.play(); });
+  });
+
+  /* ---------- forms: honest, client-side only ---------- */
+  function fieldVal(id){ var el = document.getElementById(id); return el ? el.value.trim() : ""; }
+  function markInvalid(id, bad){
+    var el = document.getElementById(id);
+    if (el) el.closest(".field").classList.toggle("invalid", bad);
+    return !bad;
+  }
+  function emailOk(v){ return /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v); }
+  function download(name, text){
+    var blob = new Blob([text], {type:"text/plain;charset=utf-8"});
+    var a = document.createElement("a");
+    a.href = URL.createObjectURL(blob);
+    a.download = name;
+    document.body.appendChild(a); a.click();
+    setTimeout(function(){ URL.revokeObjectURL(a.href); a.remove(); }, 400);
+  }
+  function wireCopy(btnId, preId){
+    var btn0 = document.getElementById(btnId);
+    if (!btn0) return;
+    btn0.addEventListener("click", function(){
+      var btn = this, text = document.getElementById(preId).textContent;
+      function done(){ btn.textContent = "تم النسخ ✓"; btn.classList.add("copied");
+        setTimeout(function(){ btn.textContent = "نسخ النص"; btn.classList.remove("copied"); }, 2200); }
+      if (navigator.clipboard && navigator.clipboard.writeText){
+        navigator.clipboard.writeText(text).then(done).catch(done);
+      } else { done(); }
+    });
+  }
+
+  var nomText = "";
+  var nominateForm = document.getElementById("nominateForm");
+  if (nominateForm) nominateForm.addEventListener("submit", function(ev){
+    ev.preventDefault();
+    var ok = true;
+    ok = markInvalid("f-nominator", fieldVal("f-nominator").length < 2) && ok;
+    ok = markInvalid("f-contact", !emailOk(fieldVal("f-contact"))) && ok;
+    ok = markInvalid("f-guest", fieldVal("f-guest").length < 2) && ok;
+    ok = markInvalid("f-story", fieldVal("f-story").length < 20) && ok;
+    if (!ok){
+      var firstBad = document.querySelector("#nominateForm .field.invalid input, #nominateForm .field.invalid textarea");
+      if (firstBad) firstBad.focus();
+      return;
+    }
+    var lines = [
+      "وثيقة ترشيح ضيف — بودكاست صِفر (ZERO Podcast)",
+      "================================================",
+      "اسم المُرشِّح: " + fieldVal("f-nominator"),
+      "البريد الإلكتروني: " + fieldVal("f-contact"),
+      "الضيف المقترح: " + fieldVal("f-guest")
+    ];
+    if (fieldVal("f-field")) lines.push("مجال الضيف: " + fieldVal("f-field"));
+    lines.push("", "لماذا تستحق القصة أن تُروى؟", fieldVal("f-story"));
+    if (fieldVal("f-link")) lines.push("", "رابط داعم: " + fieldVal("f-link"));
+    lines.push("", "------------------------------------------------", "أُجهّزت هذه الوثيقة عبر موقع صِفر. قناة الاستقبال الرسمية تُفعَّل مع إطلاق الموسم الأول.");
+    nomText = lines.join("\n");
+    document.getElementById("nominateText").textContent = nomText;
+    var res = document.getElementById("nominateResult");
+    res.classList.add("show");
+    res.scrollIntoView({behavior: reduced ? "auto" : "smooth", block:"start"});
+  });
+  var nominateDownload = document.getElementById("nominateDownload");
+  if (nominateDownload) nominateDownload.addEventListener("click", function(){
+    if (nomText) download("zero-podcast-nomination.txt", nomText);
+  });
+  wireCopy("nominateCopy", "nominateText");
+
+  var parText = "";
+  var partnerForm = document.getElementById("partnerForm");
+  if (partnerForm) partnerForm.addEventListener("submit", function(ev){
+    ev.preventDefault();
+    var ok = true;
+    ok = markInvalid("p-org", fieldVal("p-org").length < 2) && ok;
+    ok = markInvalid("p-name", fieldVal("p-name").length < 2) && ok;
+    ok = markInvalid("p-email", !emailOk(fieldVal("p-email"))) && ok;
+    ok = markInvalid("p-msg", fieldVal("p-msg").length < 20) && ok;
+    if (!ok){
+      var firstBad = document.querySelector("#partnerForm .field.invalid input, #partnerForm .field.invalid textarea");
+      if (firstBad) firstBad.focus();
+      return;
+    }
+    parText = [
+      "موجز استفسار شراكة — بودكاست صِفر (ZERO Podcast)",
+      "================================================",
+      "الجهة: " + fieldVal("p-org"),
+      "مسؤول التواصل: " + fieldVal("p-name"),
+      "البريد المهني: " + fieldVal("p-email"),
+      "صيغة الشراكة: " + fieldVal("p-type"),
+      "",
+      "الرسالة:",
+      fieldVal("p-msg"),
+      "",
+      "------------------------------------------------",
+      "أُجهّز هذا الموجز عبر موقع صِفر. قناة استقبال الشراكات الرسمية تُفعَّل مع إطلاق الموسم الأول."
+    ].join("\n");
+    document.getElementById("partnerText").textContent = parText;
+    var res = document.getElementById("partnerResult");
+    res.classList.add("show");
+    res.scrollIntoView({behavior: reduced ? "auto" : "smooth", block:"start"});
+  });
+  var partnerDownload = document.getElementById("partnerDownload");
+  if (partnerDownload) partnerDownload.addEventListener("click", function(){
+    if (parText) download("zero-podcast-partnership-brief.txt", parText);
+  });
+  wireCopy("partnerCopy", "partnerText");
+
+  /* live-clear invalid state */
+  document.querySelectorAll(".field input, .field textarea, .field select").forEach(function(el){
+    el.addEventListener("input", function(){ el.closest(".field").classList.remove("invalid"); });
+  });
+
+  /* ---------- init ---------- */
+  show(viewFromHash(), (location.hash || "").replace("#","").indexOf("ch-") === 0 ? location.hash.replace("#","") : null);
+  collectParallax();
+  tryAutoplay();
+  updateRail();
+  /* failsafe: nothing VISIBLE may stay hidden — if the observer missed an
+     element that is on (or near) screen, reveal it. Below-fold content
+     keeps its scroll-triggered motion until the reader reaches it. */
+  setInterval(function(){
+    var vh = window.innerHeight;
+    document.querySelectorAll(".view.active .rv:not(.in), .view.active .words:not(.in)").forEach(function(el){
+      var r = el.getBoundingClientRect();
+      if (r.top < vh * 1.25 && r.bottom > -80) el.classList.add("in");
+    });
+  }, 1200);
+})();
+</script>
+<script>
+/* Independent open-guarantee: runs even if the main script above failed.
+   If no view ended up active, activate the view named by the URL hash
+   (or home) directly — the site must always open to real content. */
+(function(){
+  function ensureOpen(){
+    if (document.querySelector(".view.active")) return;
+    var h = (location.hash || "").replace("#","");
+    var ids = ["home","episodes","story","nominate","partners","contact","research"];
+    var target = ids.indexOf(h) !== -1 ? h : "home";
+    var el = document.getElementById("view-" + target) || document.getElementById("view-home");
+    if (el) el.classList.add("active");
+  }
+  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", ensureOpen);
+  else ensureOpen();
+  window.addEventListener("load", ensureOpen);
+  setTimeout(ensureOpen, 800);
+  setTimeout(ensureOpen, 2500);
+  /* if the main motion script never ran, un-hide every animated element */
+  setTimeout(function(){
+    if (window.__zeroMain) return;
+    document.querySelectorAll(".rv, .words").forEach(function(el){ el.classList.add("in"); });
+  }, 3000);
+})();
+</script>
+</body>
+</html>
