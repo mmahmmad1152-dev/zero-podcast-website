@@ -211,8 +211,11 @@ h1,h2,h3{font-family:var(--font-display);font-weight:700;line-height:1.45}
 .feature-row{transition:background .3s}
 .feature-row:hover{background:rgba(243,236,221,.03)}
 
-/* reversed marquee variant (closing quotes strip) */
-.marquee.rev .marquee-track{animation-direction:reverse;animation-duration:40s}
+/* reversed marquee variant (closing quotes strip) — its own explicit
+   keyframes instead of animation-direction:reverse over a to-only rule,
+   which some engines leave static */
+.marquee.rev .marquee-track{animation:mqMoveRev 44s linear infinite}
+@keyframes mqMoveRev{from{transform:translateX(-50%)}to{transform:translateX(0)}}
 .marquee .mq-item.quote{font-family:var(--font-quote);font-weight:400}
 
 /* form fields drift in one by one when their view opens */
@@ -1096,7 +1099,17 @@ footer{border-top:1px solid var(--line);padding:64px 0 34px;background:#0d0b08}
         });
         el.replaceChild(frag, node);
       } else if (node.nodeType === 1 && node.tagName !== "BR"){
-        el.replaceChild(wrapWord(node), node);
+        /* swap the wrapper into place FIRST, then move the node inside it —
+           appending the node first would detach it from el and make
+           replaceChild throw (which once killed every motion on the page) */
+        var w = document.createElement("span");
+        w.className = "w";
+        var wi2 = document.createElement("span");
+        wi2.className = "wi";
+        wi2.style.setProperty("--i", idx++);
+        w.appendChild(wi2);
+        el.replaceChild(w, node);
+        wi2.appendChild(node);
       }
     });
   }
@@ -1112,7 +1125,12 @@ footer{border-top:1px solid var(--line);padding:64px 0 34px;background:#0d0b08}
       els.forEach(function(el){ el.classList.add("words", "in"); });
       return;
     }
-    els.forEach(splitWords);
+    /* one bad element must never abort the rest: if a split fails, reveal
+       that element as-is instead of letting the exception kill the script */
+    els.forEach(function(el){
+      try { splitWords(el); }
+      catch (err) { el.classList.add("words", "in"); }
+    });
     if (!wordsIO){
       wordsIO = new IntersectionObserver(function(entries){
         entries.forEach(function(e){
