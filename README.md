@@ -15,7 +15,6 @@ The official website of **ZERO Podcast (صِفر)**, an Arabic-first interview p
 - **Guest Nomination** — accessible form: nominator, proposed guest, story significance, contact details.
 - **Sponsors & Partnerships** — the editorial concept and collaboration formats, with an inquiry form. No audience metrics or sponsor claims.
 - **Contact** — no invented email or social accounts; channels are marked as announced at launch and route to the two forms.
-- **Design & Research** — the research matrix behind the design, with sources.
 
 ## Design system
 
